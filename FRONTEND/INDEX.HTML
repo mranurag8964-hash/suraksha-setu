@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SURAKSHA SETU</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    keyframes: {
+                        pulseScale: {
+                            '0%, 100%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.1)' },
+                        }
+                    },
+                    animation: {
+                        pulseScale: 'pulseScale 1.5s infinite ease-in-out',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <link rel="stylesheet" href="STYLE.CSS">
+</head>
+
+<!-- <body style="background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);" -->
+
+<body class="text-gray-100">
+    <div id="public-site-wrapper">
+        <div>
+            <section class="p-6">
+                <nav
+                    class="fixed top-0 left-0 w-full  z-50 flex items-center justify-between bg-white/90 shadow-md px-6 py-4">
+                    <img src="../img/WhatsApp Image 2025-10-05 at 00.50.35_6d56dc72.jpg" alt=""
+                        class="w-32 h-32 rounded-full ml-16">
+                    <div class="flex space-x-6 font-bold text-gray-700">
+                        <div id="nav-home"
+                            class="relative cursor-pointer hover:text-blue-600 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-[2px] after:bg-blue-600 hover:after:w-full after:transition-all after:duration-300">
+                            HOME</div>
+                        <div id="nav-features"
+                            class="relative cursor-pointer hover:text-blue-600 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-[2px] after:bg-blue-600 hover:after:w-full after:transition-all after:duration-300">
+                            FEATURES</div>
+                        <!-- <div id="nav-volunteer"
+                        class="relative cursor-pointer hover:text-blue-600 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-[2px] after:bg-blue-600 hover:after:w-full after:transition-all after:duration-300">
+                        VOLUNTEER</div> -->
+                        <div id="nav-map"
+                            class="relative cursor-pointer hover:text-blue-600 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-[2px] after:bg-blue-600 hover:after:w-full after:transition-all after:duration-300">
+                            MAP</div>
+                        <div id="nav-reports"
+                            class="relative cursor-pointer hover:text-blue-600 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-[2px] after:bg-blue-600 hover:after:w-full after:transition-all after:duration-300">
+                            REPORTS</div>
+                        <div id="nav-contact"
+                            class="relative cursor-pointer hover:text-blue-600 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-[2px] after:bg-blue-600 hover:after:w-full after:transition-all after:duration-300">
+                            CONTACT</div>
+                    </div>
+                    <div id="auth-container">
+                        <div id="logged-out-view" class="flex space-x-4">
+                            <button id="authority-login-btn"
+                                class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700">
+                                AUTHORITY LOGIN
+                            </button>
+                            <button id="citizen-login-btn"
+                                class="bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700">
+                                CITIZEN LOGIN
+                            </button>
+                        </div>
+
+                        <div id="logged-in-view" class="hidden items-center space-x-4">
+                            <div class="text-right text-gray-700">
+                                <p id="greeting-text" class="text-xs font-light"></p>
+                                <p id="user-name-display" class="font-semibold"></p>
+                            </div>
+                            <button id="logout-btn"
+                                class="bg-red-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-700">
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </nav>
+            </section>
+        </div>
+        <main>
+
+            <section id="hero-section">
+                <div class="text-center mt-12 space-y-6 len flex flex-col justify-between">
+                    <div class="text-3xl font-bold text-blue-600 mt-24">
+                        SMART PUBLIC SAFETY REPORTING SYSTEM
+                    </div>
+                    <div class="text-xl text-black font-bold ">
+                        AI POWERED
+                    </div>
+                    <div class="mb-12 mt-24 text-black font-bold">
+                        AI-powered platform for instant authority reporting, anonymous submissions, predictive crime
+                        prevention, and blockchain-verified witness tokens.
+                    </div>
+
+                    <div>
+                        <button id="sos-btn"
+                            class="w-96 h-24 mt-32  text-white rounded-full text-3xl font-bold shadow-2xl transition animate-pulseScale"
+                            style="background: linear-gradient(90deg, rgba(204,27,27,1) 42%, rgba(252,176,69,1) 92%);">
+                            EMERGENCY SOS
+                        </button>
+                    </div>
+                    <div>
+                        <!-- <button id="join-volunteer-btn"
+                            class="bg-green-500 text-white mt-12 px-6 py-2 rounded-lg font-medium shadow hover:shadow-xl">
+                            JOIN AS VOLUNTEER
+                        </button> -->
+                    </div>
+                </div>
+            </section>
+            <section id="features-section" class="py-12 hidden">
+                <div class="max-w-7xl h-[calc(100vh-150px)] mx-auto px-4 lg:px-6 flex flex-col">
+                    <!-- Heading -->
+                    <h2 class="text-2xl md:text-3xl font-bold text-center text-white mb-6">Core Features</h2>
+
+                    <!-- Cards Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4 flex-grow mt-12">
+
+                        <!-- Card 1 -->
+                        <div
+                            class="bg-gray-900/70 backdrop-blur-md rounded-2xl shadow-lg p-5 hover:scale-105 transition-transform duration-300 min-h-[160px] flex flex-col">
+                            <h3 class="text-lg font-semibold text-white mb-2 text-center">Fast Performance</h3>
+                            <p class="text-gray-300 text-sm flex-grow">Experience blazing fast load times and seamless
+                                interactions with optimized code.</p>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div
+                            class="bg-gray-900/70 backdrop-blur-md rounded-2xl shadow-lg p-5 hover:scale-105 transition-transform duration-300 min-h-[160px] flex flex-col">
+                            <h3 class="text-lg font-semibold text-white mb-2">Responsive Design</h3>
+                            <p class="text-gray-300 text-sm flex-grow">Looks perfect on any device with a fluid and
+                                adaptive
+                                layout.</p>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div
+                            class="bg-gray-900/70 backdrop-blur-md rounded-2xl shadow-lg p-5 hover:scale-105 transition-transform duration-300 min-h-[160px] flex flex-col">
+                            <h3 class="text-lg font-semibold text-white mb-2">Secure & Reliable</h3>
+                            <p class="text-gray-300 text-sm flex-grow">Your data is safe with our strong security
+                                measures
+                                and
+                                uptime guarantee.</p>
+                        </div>
+
+                        <!-- Card 4 -->
+                        <div
+                            class="bg-gray-900/70 backdrop-blur-md rounded-2xl shadow-lg p-5 hover:scale-105 transition-transform duration-300 min-h-[160px] flex flex-col">
+                            <h3 class="text-lg font-semibold text-white mb-2">Modern UI</h3>
+                            <p class="text-gray-300 text-sm flex-grow">Aesthetic and user-friendly interface designed
+                                with
+                                modern trends in mind.</p>
+                        </div>
+
+                        <!-- Card 5 -->
+                        <div
+                            class="bg-gray-900/70 backdrop-blur-md rounded-2xl shadow-lg p-5 hover:scale-105 transition-transform duration-300 min-h-[160px] flex flex-col">
+                            <h3 class="text-lg font-semibold text-white mb-2">Customizable</h3>
+                            <p class="text-gray-300 text-sm flex-grow">Easily adjust features and styles to fit your
+                                unique
+                                needs.</p>
+                        </div>
+
+                        <!-- Card 6 -->
+                        <div
+                            class="bg-gray-900/70 backdrop-blur-md rounded-2xl shadow-lg p-5 hover:scale-105 transition-transform duration-300 min-h-[160px] flex flex-col">
+                            <h3 class="text-lg font-semibold text-white mb-2">24/7 Support</h3>
+                            <p class="text-gray-300 text-sm flex-grow">Get assistance anytime with our round-the-clock
+                                support
+                                team.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- <section id="volunteer-section" class="py-16 sm:py-24 hidden">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl sm:text-5xl font-bold text-blue-400">Volunteer System</h2>
+                    <p class="mt-4 text-lg text-gray-300">Join our community and make a difference</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+
+                    <div class="lg:col-span-3 bg-gray-900/50 p-8 rounded-2xl border border-gray-700">
+                        <h3 class="text-2xl font-semibold text-white mb-6">Join as Volunteer</h3>
+                        <form id="volunteer-form" action="#" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="full-name" class="block text-sm font-medium text-gray-400 mb-2">Full
+                                        Name</label>
+                                    <input type="text" id="full-name" placeholder="Your full name"
+                                        class="w-full bg-gray-700 border-gray-600 text-white rounded-lg px-4 py-3 focus:ring-blue-500 focus:border-blue-500">
+                                </div>
+                                <div>
+                                    <label for="contact-number"
+                                        class="block text-sm font-medium text-gray-400 mb-2">Contact
+                                        Number</label>
+                                    <div class="flex">
+                                        <span
+                                            class="inline-flex items-center px-3 text-sm text-gray-400 bg-gray-800 border border-r-0 border-gray-600 rounded-l-md">+91</span>
+                                        <input type="text" id="contact-number" placeholder="9876543210"
+                                            class="w-full bg-gray-700 border-gray-600 text-white rounded-r-lg px-4 py-3 focus:ring-blue-500 focus:border-blue-500">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-400 mb-2">Email
+                                    Address</label>
+                                <input type="email" id="email" placeholder="your.email@example.com"
+                                    class="w-full bg-gray-700 border-gray-600 text-white rounded-lg px-4 py-3 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label for="skills" class="block text-sm font-medium text-gray-400 mb-2">Skills</label>
+                                <select id="skills"
+                                    class="w-full bg-gray-700 border-gray-600 text-white rounded-lg px-4 py-3 focus:ring-blue-500 focus:border-blue-500">
+                                    <option value="">Select your primary skill</option>
+                                    <option value="first-aid">First Aid & Medical</option>
+                                    <option value="awareness">Communication & Outreach</option>
+                                    <option value="emergency-response">Logistics & Coordination</option>
+                                    <option value="tech-support">Technical Support</option>
+                                    <option value="counseling">Counseling</option>
+                                    <option value="translation">Translation</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="location"
+                                    class="block text-sm font-medium text-gray-400 mb-2">Location</label>
+                                <input type="text" id="location" placeholder="City, State"
+                                    class="w-full bg-gray-700 border-gray-600 text-white rounded-lg px-4 py-3 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div>
+                                <button type="submit"
+                                    class="w-full text-white font-bold py-3 px-6 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition duration-300">
+                                    JOIN AS VOLUNTEER
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="lg:col-span-2 bg-gray-900/50 p-8 rounded-2xl border border-purple-500/50">
+                        <h3 class="text-2xl font-semibold text-white mb-6">Volunteer Dashboard</h3>
+                        <div class="space-y-6">
+                            <div class="bg-gray-800/60 p-4 rounded-lg">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <p class="text-sm text-gray-400">Current Level</p>
+                                        <p class="text-lg font-bold text-gray-300">Progress to Gold</p>
+                                    </div>
+                                    <div
+                                        class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-gray-400 to-gray-200 shadow-lg">
+                                        <span class="font-bold text-xl text-gray-700">Ag</span>
+                                    </div>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2.5 mt-2">
+                                    <div class="bg-blue-500 h-2.5 rounded-full" style="width: 62.5%"></div>
+                                </div>
+                                <p class="text-right text-xs text-gray-400 mt-1">1250 / 2000 points</p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 text-center">
+                                <div class="bg-gray-800/60 p-4 rounded-lg">
+                                    <p class="text-3xl font-bold text-blue-400">42</p>
+                                    <p class="text-sm text-gray-400">Reports Helped</p>
+                                </div>
+                                <div class="bg-gray-800/60 p-4 rounded-lg">
+                                    <p class="text-3xl font-bold text-blue-400">1250</p>
+                                    <p class="text-sm text-gray-400">Total Points</p>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-md font-semibold text-gray-300 mb-2">Your Badges</p>
+                                <div class="flex space-x-3">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-700 to-yellow-500 flex items-center justify-center font-bold text-white">
+                                        Br</div>
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-400 to-gray-200 flex items-center justify-center font-bold text-gray-700 ring-2 ring-blue-400">
+                                        Ag</div>
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-500 to-yellow-300 flex items-center justify-center font-bold text-yellow-900 opacity-50">
+                                        Au</div>
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-600 to-gray-400 flex items-center justify-center font-bold text-white opacity-50">
+                                        Pt</div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-md font-semibold text-gray-300 mb-3">Top Volunteers of the Month</p>
+                                <div class="space-y-3">
+                                    <div class="flex items-center bg-gray-800/60 p-2 rounded-lg">
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center font-bold text-white mr-4">
+                                            1</div>
+                                        <p class="text-white flex-grow">Priya Sharma</p>
+                                        <p class="font-semibold text-green-400">3450 pts</p>
+                                    </div>
+                                    <div class="flex items-center bg-gray-800/60 p-2 rounded-lg">
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center font-bold text-gray-800 mr-4">
+                                            2</div>
+                                        <p class="text-white flex-grow">Rahul Kumar</p>
+                                        <p class="font-semibold text-green-400">2890 pts</p>
+                                    </div>
+                                    <div class="flex items-center bg-gray-800/60 p-2 rounded-lg">
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-yellow-600 flex items-center justify-center font-bold text-white mr-4">
+                                            3</div>
+                                        <p class="text-white flex-grow">Anjali Patel</p>
+                                        <p class="font-semibold text-green-400">2650 pts</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section> -->
+            <section id="map-section" class="py-16 sm:py-24 hidden">
+                <div class="max-w-7xl mx-auto px-6 lg:px-8 mt-12">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl sm:text-5xl font-bold text-blue-400">Predictive Theft Hotspot Map</h2>
+                        <p class="mt-4 text-lg text-gray-300">AI-powered crime prediction and real-time safety alerts
+                        </p>
+                    </div>
+
+                    <div class="bg-gray-900/50 p-4 rounded-2xl border border-blue-500/50">
+                        <div id="map-container" class="h-[60vh] w-full rounded-lg z-0"></div>
+                    </div>
+
+                    <div class="flex justify-center items-center space-x-6 mt-6">
+                        <div class="flex items-center space-x-2">
+                            <span class="w-4 h-4 rounded-full bg-red-500"></span>
+                            <span class="text-gray-300">High Alert Zone</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="w-4 h-4 rounded-full bg-yellow-500"></span>
+                            <span class="text-gray-300">Medium Risk</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="w-4 h-4 rounded-full bg-green-500"></span>
+                            <span class="text-gray-300">Safe Zone</span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <section id="reports-section" class="py-16 sm:py-24 hidden">
+                <div class="max-w-7xl mx-auto px-6 lg:px-8 mt-12">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl sm:text-5xl font-bold text-blue-400">Citizen Reports & Status</h2>
+                        <p class="mt-4 text-lg text-gray-300">Track your reports and community safety updates</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div
+                            class="bg-gray-800/60 rounded-xl border-l-4 border-green-500 p-6 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-start mb-4">
+                                    <div>
+                                        <p class="text-sm font-semibold text-gray-400">Report #SS2025001</p>
+                                        <p class="text-lg font-bold text-white">Theft Incident</p>
+                                    </div>
+                                    <span
+                                        class="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full bg-green-500/20 text-green-400">SOLVED</span>
+                                </div>
+                                <div class="space-y-3 text-sm text-gray-300">
+                                    <p class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2 text-gray-400">
+                                            <path fill-rule="evenodd"
+                                                d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.1.4-.223.654-.369.254-.145.532-.3.81-.462.279-.162.57-.325.87-.492.298-.167.62-.336.95-.508.33-.172.67-.347 1.02-.527.349-.18.72-.364 1.1-.546.38-.182.78-.37 1.19-.562.41-.193.85-.39 1.3-.593.45-.202.92-.41 1.4-.622.48-.213 1-.43 1.5-.65C19.645 12.318 20 12 20 12V6.382a2 2 0 00-1.055-1.788l-6-3.573a2 2 0 00-1.89 0l-6 3.573A2 2 0 002 6.382V12s.355.318.956.65c.6.332 1.2.655 1.8.968.6.313 1.2.618 1.8.91.6.293 1.2.567 1.8.824.6.257 1.2.494 1.8.708.6.214 1.2.403 1.8.563z"
+                                                clip-rule="evenodd" />
+                                        </svg>Connaught Place, Delhi</p>
+                                    <p>Mobile phone theft reported near Metro Station. Suspect apprehended with CCTV
+                                        evidence.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center mt-6 pt-4 border-t border-gray-700">
+                                <span class="text-xs font-medium text-green-400">Case Closed</span>
+                                <a href="#" class="text-sm font-semibold text-blue-400 hover:text-blue-300">View
+                                    Details</a>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-gray-800/60 rounded-xl border-l-4 border-blue-500 p-6 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-start mb-4">
+                                    <div>
+                                        <p class="text-sm font-semibold text-gray-400">Report #SS2025002</p>
+                                        <p class="text-lg font-bold text-white">Vehicle Theft</p>
+                                    </div>
+                                    <span
+                                        class="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full bg-blue-500/20 text-blue-400">IN
+                                        PROGRESS</span>
+                                </div>
+                                <div class="space-y-3 text-sm text-gray-300">
+                                    <p class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2 text-gray-400">
+                                            <path fill-rule="evenodd"
+                                                d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.1.4-.223.654-.369.254-.145.532-.3.81-.462.279-.162.57-.325.87-.492.298-.167.62-.336.95-.508.33-.172.67-.347 1.02-.527.349-.18.72-.364 1.1-.546.38-.182.78-.37 1.19-.562.41-.193.85-.39 1.3-.593.45-.202.92-.41 1.4-.622.48-.213 1-.43 1.5-.65C19.645 12.318 20 12 20 12V6.382a2 2 0 00-1.055-1.788l-6-3.573a2 2 0 00-1.89 0l-6 3.573A2 2 0 002 6.382V12s.355.318.956.65c.6.332 1.2.655 1.8.968.6.313 1.2.618 1.8.91.6.293 1.2.567 1.8.824.6.257 1.2.494 1.8.708.6.214 1.2.403 1.8.563z"
+                                                clip-rule="evenodd" />
+                                        </svg>Sector 18, Noida</p>
+                                    <p>Two-wheeler theft from parking area. Investigation ongoing with forensic team.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center mt-6 pt-4 border-t border-gray-700">
+                                <span class="text-xs font-medium text-blue-400">Under Investigation</span>
+                                <a href="#" class="text-sm font-semibold text-blue-400 hover:text-blue-300">View
+                                    Details</a>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-gray-800/60 rounded-xl border-l-4 border-yellow-500 p-6 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-start mb-4">
+                                    <div>
+                                        <p class="text-sm font-semibold text-gray-400">Report #SS2025003</p>
+                                        <p class="text-lg font-bold text-white">Harassment</p>
+                                    </div>
+                                    <span
+                                        class="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full bg-yellow-500/20 text-yellow-400">PENDING</span>
+                                </div>
+                                <div class="space-y-3 text-sm text-gray-300">
+                                    <p class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2 text-gray-400">
+                                            <path fill-rule="evenodd"
+                                                d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.1.4-.223.654-.369.254-.145.532-.3.81-.462.279-.162.57-.325.87-.492.298-.167.62-.336.95-.508.33-.172.67-.347 1.02-.527.349-.18.72-.364 1.1-.546.38-.182.78-.37 1.19-.562.41-.193.85-.39 1.3-.593.45-.202.92-.41 1.4-.622.48-.213 1-.43 1.5-.65C19.645 12.318 20 12 20 12V6.382a2 2 0 00-1.055-1.788l-6-3.573a2 2 0 00-1.89 0l-6 3.573A2 2 0 002 6.382V12s.355.318.956.65c.6.332 1.2.655 1.8.968.6.313 1.2.618 1.8.91.6.293 1.2.567 1.8.824.6.257 1.2.494 1.8.708.6.214 1.2.403 1.8.563z"
+                                                clip-rule="evenodd" />
+                                        </svg>Cyber City, Gurgaon</p>
+                                    <p>Workplace harassment complaint filed. Awaiting initial review and assignment.</p>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center mt-6 pt-4 border-t border-gray-700">
+                                <span class="text-xs font-medium text-yellow-400">Awaiting Review</span>
+                                <a href="#" class="text-sm font-semibold text-blue-400 hover:text-blue-300">View
+                                    Details</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                        <div class="bg-gray-800/60 p-6 rounded-xl">
+                            <div
+                                class="mx-auto w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    class="w-6 h-6 text-green-400">
+                                    <path fill-rule="evenodd"
+                                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <p class="text-3xl font-bold text-white">68%</p>
+                            <p class="text-gray-400 text-sm">Resolution Rate</p>
+                        </div>
+                        <div class="bg-gray-800/60 p-6 rounded-xl">
+                            <div
+                                class="mx-auto w-12 h-12 rounded-full bg-yellow-500/20 flex items-center justify-center mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    class="w-6 h-6 text-yellow-400">
+                                    <path fill-rule="evenodd"
+                                        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <p class="text-3xl font-bold text-white">24h</p>
+                            <p class="text-gray-400 text-sm">Avg Response Time</p>
+                        </div>
+                        <div class="bg-gray-800/60 p-6 rounded-xl">
+                            <div
+                                class="mx-auto w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    class="w-6 h-6 text-blue-400">
+                                    <path
+                                        d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM17.25 19.128l-.001.121a.75.75 0 01-.363.63c-1.43.812-3.041 1.28-4.781 1.411a.75.75 0 01-.702-.859 13.067 13.067 0 012.91-4.417a2.25 2.25 0 014.242 0V19.128z" />
+                                </svg>
+                            </div>
+                            <p class="text-3xl font-bold text-white">156</p>
+                            <p class="text-gray-400 text-sm">Active Cases</p>
+                        </div>
+                        <div class="bg-gray-800/60 p-6 rounded-xl">
+                            <div
+                                class="mx-auto w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    class="w-6 h-6 text-purple-400">
+                                    <path fill-rule="evenodd"
+                                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <p class="text-3xl font-bold text-white">4.8</p>
+                            <p class="text-gray-400 text-sm">Citizen Satisfaction</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <section id="contact-section" class="py-16 sm:py-24 hidden">
+                <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col items-center mt-12">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl sm:text-5xl font-bold text-blue-400">Contact Us</h2>
+                        <p class="mt-4 text-lg text-black font-bold">Get in touch with our support team</p>
+                    </div>
+
+                    <div
+                        class="w-full max-w-4xl bg-gray-900/40 p-8 sm:p-10 rounded-2xl border border-blue-500/30 shadow-[0_0_20px_theme(colors.blue.400)]">
+                        <form id="contact-form" action="#" class="space-y-8">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div>
+                                    <label for="contact-name"
+                                        class="block text-sm font-medium text-gray-400 mb-2">Name</label>
+                                    <input type="text" id="contact-name" placeholder="Your full name"
+                                        class="w-full bg-gray-700 border-gray-600 text-white rounded-lg px-4 py-3 focus:ring-blue-500 focus:border-blue-500 transition">
+                                </div>
+                                <div>
+                                    <label for="contact-email"
+                                        class="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                                    <input type="email" id="contact-email" placeholder="your.email@example.com"
+                                        class="w-full bg-gray-700 border-gray-600 text-white rounded-lg px-4 py-3 focus:ring-blue-500 focus:border-blue-500 transition">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="contact-message"
+                                    class="block text-sm font-medium text-gray-400 mb-2">Message</label>
+                                <textarea id="contact-message" rows="5" placeholder="How can we help you?"
+                                    class="w-full bg-gray-700 border-gray-600 text-white rounded-lg px-4 py-3 focus:ring-blue-500 focus:border-blue-500 transition"></textarea>
+                            </div>
+                            <div class="text-left">
+                                <button type="submit"
+                                    class="text-white font-bold py-3 px-8 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition duration-300">
+                                    SEND MESSAGE
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <footer class="mt-24 text-center text-gray-400 text-sm">
+                    <div class="flex justify-center space-x-4 mb-4">
+                        <a href="#"
+                            class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-blue-600 transition"><svg
+                                class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                    d="M19.237 4.26a1.5 1.5 0 00-1.06-.443H5.823a1.5 1.5 0 00-1.06.443c-1.738 1.738-2 4.903-1.034 7.422.381.99.99 1.92 1.75 2.753.768.84 1.68 1.554 2.68 2.11C9.17 17.152 10.533 17.5 12 17.5c1.466 0 2.83-.348 3.84-1.045.99-.65 1.902-1.363 2.68-2.203.76-.833 1.37-1.763 1.75-2.753.966-2.52.704-5.684-1.033-7.422zM12 15.5c-1.82 0-3.352-1.248-3.79-2.994a.5.5 0 01.48-.506h6.62a.5.5 0 01.48.506c-.438 1.746-1.97 2.994-3.79 2.994zm-2.5-5a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                            </svg></a>
+                        <a href="#"
+                            class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-blue-600 transition"><svg
+                                class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                    d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                            </svg></a>
+                        <a href="#"
+                            class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-blue-600 transition"><svg
+                                class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M12 2C6.477 2 2 6.477 2 12.014c0 4.438 2.865 8.214 6.839 9.541.5.092.682-.218.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.942.359.31.678.92.678 1.852 0 1.336-.012 2.41-.012 2.735 0 .266.18.577.688.48A10.002 10.002 0 0022 12.014C22 6.477 17.523 2 12 2z"
+                                    clip-rule="evenodd" />
+                            </svg></a>
+                    </div>
+                    <p>© 2025 Suraksha Setu | Smart Public Safety System</p>
+                </footer>
+            </section>
+        </main>
+    </div>
+   <div id="authority-dashboard" class="hidden min-h-screen bg-white text-gray-900">
+    <div class="flex">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-gray-100 p-6 flex flex-col border-r border-gray-300">
+            <h1 class="text-xl font-bold text-gray-900 mb-8">SURAKSHA SETU</h1>
+            <nav class="flex flex-col space-y-2">
+                <a href="#" id="link-overview" class="flex items-center p-2 rounded-lg text-white bg-blue-600">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
+                    </svg>
+                    Hotspot-Map
+                </a>
+                <a href="#" id="link-citizen-reports" class="flex items-center p-2 rounded-lg text-gray-700 hover:bg-gray-200 hover:text-gray-900">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                        </path>
+                    </svg>
+                    Citizen Reports
+                </a>
+                <a href="#" id="link-auto-detection" class="flex items-center p-2 rounded-lg text-gray-700 hover:bg-gray-200 hover:text-gray-900">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                        </path>
+                    </svg>
+                    Auto-Detection
+                </a>
+            </nav>
+
+            <div class="mt-auto">
+                <a href="#" id="dashboard-logout-btn" class="flex items-center p-2 rounded-lg text-red-600 hover:bg-red-100 hover:text-red-700">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                        </path>
+                    </svg>
+                    Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-8 overflow-y-auto">
+            <!-- Overview -->
+            <div id="view-overview">
+                <p class="text-gray-700 mt-1 mb-8">Real-time summary of public safety activity.</p>
+            </div>
+
+            <!-- Auto Detection -->
+            <div id="view-auto-detection" class="hidden">
+                <h1 class="text-3xl font-bold text-gray-900">AI Auto-Detection Reports</h1>
+                <p class="text-gray-600 mt-1 mb-8">Verify and dispatch units based on predictive crime alerts.</p>
+
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">AI Auto-Detection Alerts</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-500">
+                        <h3 class="font-bold text-red-700">High Priority (Red)</h3>
+                        <p class="text-sm text-red-600">Crimes in Progress / Accidents</p>
+                    </div>
+                    <div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-500">
+                        <h3 class="font-bold text-yellow-700">Medium Priority (Yellow)</h3>
+                        <p class="text-sm text-yellow-600">Suspicious Activity / Vandalism</p>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+                        <h3 class="font-bold text-green-700">Low Priority (Green)</h3>
+                        <p class="text-sm text-green-600">Minor Traffic Issues / Unattended Objects</p>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg overflow-hidden border border-gray-300">
+                    <table class="w-full text-left">
+                        <thead class="bg-gray-200 text-xs text-gray-700 uppercase">
+                            <tr>
+                                <th class="p-4">ID</th>
+                                <th class="p-4">Priority</th>
+                                <th class="p-4">Detected Event</th>
+                                <th class="p-4">Location</th>
+                                <th class="p-4">Confidence %</th>
+                                <th class="p-4">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-300">
+                            <tr class="hover:bg-gray-100">
+                                <td class="p-4 font-medium text-gray-900">AI-1050</td>
+                                <td class="p-4"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-700">HIGH</span></td>
+                                <td class="p-4 text-gray-900">Unusual Gathering (Near Crime Hotspot)</td>
+                                <td class="p-4">Fort Business Dist.</td>
+                                <td class="p-4 text-green-700">92%</td>
+                                <td class="p-4"><a href="#" class="font-semibold text-red-600 hover:underline">Dispatch</a></td>
+                            </tr>
+                            <tr class="hover:bg-gray-100">
+                                <td class="p-4 font-medium text-gray-900">AI-1049</td>
+                                <td class="p-4"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-700">MEDIUM</span></td>
+                                <td class="p-4 text-gray-900">Broken Street Lamp</td>
+                                <td class="p-4">Marine Drive</td>
+                                <td class="p-4 text-green-700">85%</td>
+                                <td class="p-4"><a href="#" class="font-semibold text-yellow-700 hover:underline">Log Maintenance</a></td>
+                            </tr>
+                            <tr class="hover:bg-gray-100">
+                                <td class="p-4 font-medium text-gray-900">AI-1048</td>
+                                <td class="p-4"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">LOW</span></td>
+                                <td class="p-4 text-gray-900">Illegal Parking (Minor)</td>
+                                <td class="p-4">Bandra West</td>
+                                <td class="p-4 text-yellow-700">78%</td>
+                                <td class="p-4"><a href="#" class="font-semibold text-gray-700 hover:underline">Dismiss</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Citizen Reports -->
+            <div id="view-citizen-reports" class="hidden">
+                <h1 class="text-3xl font-bold text-gray-900">Citizen Reports</h1>
+                <p class="text-gray-600 mt-1 mb-8">Review, update, and manage civilian-filed incidents.</p>
+
+                <div class="bg-gray-50 rounded-lg overflow-hidden border border-gray-300">
+                    <table class="w-full text-left">
+                        <thead class="bg-gray-200 text-xs text-gray-700 uppercase">
+                            <tr>
+                                <th class="p-4">ID</th>
+                                <th class="p-4">Citizen</th>
+                                <th class="p-4">Location</th>
+                                <th class="p-4">Type</th>
+                                <th class="p-4">Status</th>
+                                <th class="p-4">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-300 text-sm">
+                            <tr class="hover:bg-gray-100">
+                                <td class="p-4 font-medium text-gray-900">CR25#001</td>
+                                <td class="p-4">Anonymous</td>
+                                <td class="p-4">Worli Sea Face</td>
+                                <td class="p-4">Suspected Drug Trade</td>
+                                <td class="p-4"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-700">Pending</span></td>
+                                <td class="p-4"><a href="#" class="font-semibold text-blue-700 hover:underline">View/Update</a></td>
+                            </tr>
+                            <tr class="hover:bg-gray-100">
+                                <td class="p-4 font-medium text-gray-900">CR25#002</td>
+                                <td class="p-4">Rahul K.</td>
+                                <td class="p-4">Sector 18, Noida</td>
+                                <td class="p-4">Vehicle Theft</td>
+                                <td class="p-4"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-700">In Progress</span></td>
+                                <td class="p-4"><a href="#" class="font-semibold text-blue-700 hover:underline">View Details</a></td>
+                            </tr>
+                            <tr class="hover:bg-gray-100">
+                                <td class="p-4 font-medium text-gray-900">CR25#003</td>
+                                <td class="p-4">Priya S.</td>
+                                <td class="p-4">Connaught Place</td>
+                                <td class="p-4">Mobile Theft</td>
+                                <td class="p-4"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">Solved</span></td>
+                                <td class="p-4"><a href="#" class="font-semibold text-blue-700 hover:underline">View Details</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Hotspot Map -->
+            <div id="view-hotspot-map" class="hidden">
+                <h1 class="text-3xl font-bold text-gray-900">Live Predictive Hotspot Map</h1>
+                <p class="text-gray-600 mt-1 mb-8">Visualize risk zones and officer locations.</p>
+
+                <div class="bg-gray-50 rounded-lg overflow-hidden border border-blue-200">
+                    <div id="dashboard-map-container" class="h-[70vh] w-full z-0"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+    <button id="open-chat-btn"
+        class="fixed bottom-6 right-6 w-14 h-14 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-lg hover:bg-blue-700 transition">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+            </path>
+        </svg>
+    </button>
+    <div id="chatbot-modal" class="hidden fixed inset-0 bg-[#11121E] z-50 flex flex-col">
+        <header class="flex items-center justify-between p-4 border-b border-gray-700">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+                        </path>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="font-bold text-white">Suraksha AI Assistant</h2>
+                    <p class="text-xs text-gray-400 flex items-center"><span
+                            class="w-2 h-2 bg-green-500 rounded-full mr-1.5"></span>Online • Ready to help</p>
+                </div>
+            </div>
+            <button id="close-chat-btn" class="text-gray-400 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+        </header>
+
+        <main id="chat-log" class="flex-1 p-8 overflow-y-auto">
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-gray-800 p-4 rounded-lg inline-block">
+                    <p class="text-white">Hello! I'm your Suraksha AI Assistant. How can I help you today?</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                    <button
+                        class="prompt-btn text-left p-4 rounded-lg bg-blue-500/20 hover:bg-blue-500/30 text-white transition">
+                        <p class="font-semibold">How do I report an incident?</p>
+                    </button>
+                    <button
+                        class="prompt-btn text-left p-4 rounded-lg bg-purple-500/20 hover:bg-purple-500/30 text-white transition">
+                        <p class="font-semibold">Volunteer program info</p>
+                    </button>
+                    <button
+                        class="prompt-btn text-left p-4 rounded-lg bg-green-500/20 hover:bg-green-500/30 text-white transition">
+                        <p class="font-semibold">Login help</p>
+                    </button>
+                    <button
+                        class="prompt-btn text-left p-4 rounded-lg bg-yellow-500/20 hover:bg-yellow-500/30 text-white transition">
+                        <p class="font-semibold">Safety tips</p>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <form id="chat-form" class="p-4">
+            <div class="max-w-3xl mx-auto flex items-center space-x-3">
+                <input type="text" id="chat-input" placeholder="Type your message..."
+                    class="w-full bg-gray-800 text-white px-4 py-3 rounded-lg border border-gray-700 focus:ring-blue-500 focus:border-blue-500"
+                    autocomplete="off">
+                <button type="submit"
+                    class="w-12 h-12 flex-shrink-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </div>
+    <!-- Chat Window -->
+    <div id="authority-login-modal"
+        class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md relative text-gray-800">
+            <button id="close-authority-modal"
+                class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl font-bold">&times;</button>
+
+            <div class="flex border-b border-gray-200 mb-6">
+                <button id="show-authority-login-btn"
+                    class="flex-1 py-2 font-semibold text-blue-600 border-b-2 border-blue-600">Login</button>
+                <button id="show-authority-register-btn"
+                    class="flex-1 py-2 font-semibold text-gray-500">Register</button>
+            </div>
+
+            <form id="authority-login-form" class="space-y-5">
+                <h2 class="text-2xl font-bold text-gray-800 text-center mb-4">Authority Login</h2>
+                <div>
+                    <label for="badge-id" class="block text-gray-700 text-sm font-medium mb-2">Badge ID</label>
+                    <input type="text" id="badge-id" placeholder="Enter your badge ID"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="authority-login-password"
+                        class="block text-gray-700 text-sm font-medium mb-2">Password</label>
+                    <input type="password" id="authority-login-password" placeholder="Enter your password"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <button type="submit"
+                    class="w-full bg-red-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-red-700 transition">
+                    Login
+                </button>
+            </form>
+
+            <form id="authority-register-form" class="hidden space-y-5">
+                <h2 class="text-2xl font-bold text-gray-800 text-center mb-4">Authority Registration</h2>
+                <div>
+                    <label for="register-auth-name" class="block text-gray-700 text-sm font-medium mb-2">Full
+                        Name</label>
+                    <input type="text" id="register-auth-name" placeholder="Enter your full name"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                </div>
+                <div>
+                    <label for="register-badge-id" class="block text-gray-700 text-sm font-medium mb-2">Badge
+                        ID</label>
+                    <input type="text" id="register-badge-id" placeholder="Enter your badge ID"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                </div>
+                <div>
+                    <label for="register-auth-email" class="block text-gray-700 text-sm font-medium mb-2">Official
+                        Email</label>
+                    <input type="email" id="register-auth-email" placeholder="Enter your official email"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                </div>
+                <div>
+                    <label for="station" class="block text-gray-700 text-sm font-medium mb-2">Station</label>
+                    <select id="station" class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                        <option>Select your station</option>
+                        <option>Central Police Station</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="register-auth-password" class="block text-gray-700 text-sm font-medium mb-2">Create
+                        Password</label>
+                    <input type="password" id="register-auth-password" placeholder="Create a strong password"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                </div>
+                <button type="submit"
+                    class="w-full bg-red-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-red-700 transition">
+                    Register
+                </button>
+            </form>
+            <div id="authority-otp-form" class="hidden">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Verify Authority Account</h2>
+                <p class="text-gray-600 text-sm mb-6">A verification code has been sent to the official email:
+                    <strong id="authority-otp-destination"></strong>.
+                </p>
+                <div class="space-y-5">
+                    <div>
+                        <label for="authority-otp-input"
+                            class="block text-gray-700 text-sm font-medium mb-2">Verification Code</label>
+                        <input type="text" id="authority-otp-input" placeholder="Enter 6-digit code"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg text-center tracking-[0.5em]">
+                    </div>
+                    <button id="authority-verify-otp-btn"
+                        class="w-full text-white font-bold py-3 px-4 rounded-lg bg-red-600 hover:bg-red-700 transition">
+                        Verify & Register
+                    </button>
+                </div>
+                <p class="text-center text-sm text-gray-500 mt-6">
+                    <a href="#" id="authority-go-back-link" class="font-semibold text-blue-600 hover:underline">Go
+                        Back</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div id="citizen-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-xl shadow-xl w-full max-w-sm relative text-gray-800">
+            <button id="close-citizen-modal"
+                class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl font-bold">&times;</button>
+
+            <form id="login-form" class="">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Citizen Login</h2>
+                <div class="space-y-5">
+                    <div>
+                        <label for="login-email" class="block text-gray-700 text-sm font-medium mb-2">Email or
+                            Phone</label>
+                        <input type="text" id="login-email" placeholder="Enter email or phone number"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label for="login-password"
+                            class="block text-gray-700 text-sm font-medium mb-2">Password</label>
+                        <input type="password" id="login-password" placeholder="Enter your password"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <button type="submit"
+                        class="w-full text-white font-bold py-3 px-4 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 transition">
+                        Login
+                    </button>
+                </div>
+                <p class="text-center text-sm text-gray-500 mt-6">
+                    Don't have an account?
+                    <a href="#" id="show-register-form-link" class="font-semibold text-blue-600 hover:underline">Sign
+                        up</a>
+                </p>
+            </form>
+
+            <form id="register-form" class="hidden">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Create Account</h2>
+                <div class="space-y-5">
+                    <div>
+                        <label for="register-name" class="block text-gray-700 text-sm font-medium mb-2">Full
+                            Name</label>
+                        <input type="text" id="register-name" placeholder="Enter your full name"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label for="register-email" class="block text-gray-700 text-sm font-medium mb-2">Email or
+                            Phone</label>
+                        <input type="text" id="register-email" placeholder="Enter email or phone number"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label for="register-password"
+                            class="block text-gray-700 text-sm font-medium mb-2">Password</label>
+                        <input type="password" id="register-password" placeholder="Create a password"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <button type="submit"
+                        class="w-full text-white font-bold py-3 px-4 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 transition">
+                        Sign up
+                    </button>
+                </div>
+                <p class="text-center text-sm text-gray-500 mt-6">
+                    Already have an account?
+                    <a href="#" id="show-login-form-link" class="font-semibold text-blue-600 hover:underline">Sign
+                        in</a>
+                </p>
+            </form>
+            <div id="otp-form" class="hidden">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Verify Your Account</h2>
+                <p class="text-gray-600 text-sm mb-6">We've sent a verification code to <strong
+                        id="otp-destination"></strong>. Please enter the code below.</p>
+                <div class="space-y-5">
+                    <div>
+                        <label for="otp-input" class="block text-gray-700 text-sm font-medium mb-2">Verification
+                            Code</label>
+                        <input type="text" id="otp-input" placeholder="Enter 6-digit code"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-center tracking-[0.5em]">
+                    </div>
+                    <button id="verify-otp-btn"
+                        class="w-full text-white font-bold py-3 px-4 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 transition">
+                        Verify & Register
+                    </button>
+                </div>
+                <p class="text-center text-sm text-gray-500 mt-6">
+                    Didn't get a code?
+                    <a href="#" id="go-back-to-register-link" class="font-semibold text-blue-600 hover:underline">Go
+                        Back</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="SCRIPT.JS"> </script>
+</body>
+
+</html>

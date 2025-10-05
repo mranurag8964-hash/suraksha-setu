@@ -1,0 +1,21 @@
+/* Group all active link styles together */
+#nav-home.active,
+#nav-features.active,
+#nav-volunteer.active,
+#nav-map.active,
+#nav-reports.active,
+#nav-contact.active {
+    font-weight: bold;
+    color: #1d4ed8; /* This is Tailwind's blue-700 */
+}
+
+/* Group all active link underlines together */
+#nav-home.active::after,
+#nav-features.active::after,
+#nav-volunteer.active::after,
+#nav-map.active::after,
+#nav-reports.active::after,
+#nav-contact.active::after {
+    width: 100%;
+}
+   body { font-family: 'Inter', sans-serif; }
